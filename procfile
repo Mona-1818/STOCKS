@@ -1,0 +1,1 @@
+web: gunicron stock.wsgi --log-file -
