@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from account.models import portfolio
 from .map import MAP
+from .assign import assign
 
 # Create your views here.
 @api_view(['GET'])
@@ -17,32 +18,31 @@ def Allstock(request):
         print({i.name})
     return Response( {'message': 'User profile not found.'}, status=status.HTTP_404_NOT_FOUND)
 
-# @api_view(['GET'])
-# def Personal_recommend(request, username):
-#     small_cap = 0
-#     large_cap = 0
-#     mid_cap = 0
-#     hold = []
-#     x = portfolio.objects.filter(username=username)
-#     for y in x:
-#         hold.append(y.companyname)
-#         f_cap = stock_data.objects.get(symbol=y.companyname) 
-#         if float(f_cap.cap) ==1:
-#             small_cap += 1
-#         elif float(f_cap.cap) == 2:
-#             mid_cap += 1
-#         else:
-#             large_cap += 1   
-#     sc, mc, lc = MAP(small_cap, mid_cap, large_cap)
-#     print(sc,mc,lc)
-#     print(hold)
-    
-    # if small_cap > mid_cap and small_cap > large_cap:
-    #     z = "sc"
-    # elif mid_cap >small_cap and mid_cap > large_cap:
-    #     z = "mc"
-    # else: 
-    #     z = "lc"
+@api_view(['GET'])
+def Personal_recommend(request, username):
+    small_cap = 0
+    large_cap = 0
+    mid_cap = 0
+    hold = []
+    x = portfolio.objects.filter(username=username)
+    for y in x:
+        hold.append(y.companyname)
+        f_cap = stock_data.objects.get(symbol=y.companyname) 
+        if float(f_cap.cap) ==1:
+            small_cap += 1
+        elif float(f_cap.cap) == 2:
+            mid_cap += 1
+        else:
+            large_cap += 1   
+    sc, mc, lc = MAP(small_cap, mid_cap, large_cap)
+    stock = assign(sc,mc,lc,hold)
+    print(stock)    
+    if small_cap > mid_cap and small_cap > large_cap:
+        z = "sc"
+    elif mid_cap >small_cap and mid_cap > large_cap:
+        z = "mc"
+    else: 
+        z = "lc"
 
     
         

@@ -5,5 +5,5 @@ urlpatterns = [
     # path('fillstock/', views.fillstock),
     # path('remove/', views.remove)
     path('allstocks/', views.Allstock),
-    # path('personal-recommendation/<str:username>/', views.Personal_recommend),
+    path('personal-recommendation/<str:username>/', views.Personal_recommend),
 ]
