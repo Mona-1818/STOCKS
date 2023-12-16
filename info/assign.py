@@ -52,7 +52,7 @@ def assign(s, m, l, x ):
         try:
             max1 = max(ps)
             a = ps.index(max1)
-            if short[a] in x:
+            if short[a] in x or short[a] in assigned_stock:
                 continue
             else:
                 assigned_stock.append(short[a])
@@ -63,7 +63,7 @@ def assign(s, m, l, x ):
         try:
             max1 = max(pm)
             a = pm.index(max1)
-            if mid[a] in x:
+            if mid[a] in x or  mid[a] in assigned_stock:
                 continue
             else:
                 assigned_stock.append(mid[a])
@@ -74,7 +74,7 @@ def assign(s, m, l, x ):
         try:
             max1 = max(pl)
             a = pl.index(max1)
-            if mid[a] in x:
+            if large[a] in x or large[a] in assigned_stock:
                 continue
             else:
                 assigned_stock.append(mid[a])
