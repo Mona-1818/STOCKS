@@ -19,6 +19,17 @@ def Allstock(request):
     return Response( {'message': 'User profile not found.'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
+def User_portfolio(request, username):
+    hold = []
+    x = portfolio.objects.filter(username=username)
+    stocks = {}
+    
+    for y in x:
+        hold.append(y.companyname) 
+    return Response({'stocks': hold}, status=status.HTTP_200_OK)
+    
+    
+@api_view(['GET'])
 def Personal_recommend(request, username):
     small_cap = 0
     large_cap = 0
