@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'knox',
     'account',
+    'info',
 ]
 
 MIDDLEWARE = [
@@ -127,9 +128,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'account.CustomUser'
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.FormParser',
         'rest_framework.authentication.TokenAuthentication',
-    ],
-    # Other settings...
-}
+        'rest_framework.parsers.MultiPartParser'
+     )
+ }

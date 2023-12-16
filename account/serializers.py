@@ -15,3 +15,15 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(validated_data['password'])
         user.save()
         return user
+    
+    def update(self, instance, validated_data):
+        instance.name = validated_data['name']
+        instance.Number = validated_data['Number']
+        instance.Portfolio_amount = validated_data['Portfolio_amount']
+        instance.Image = validated_data['Image']
+        instance.Desc = validated_data['Desc']
+        instance.occupation = validated_data['occupation']
+
+        instance.save()
+
+        return instance
